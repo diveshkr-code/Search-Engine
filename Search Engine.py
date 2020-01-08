@@ -54,7 +54,7 @@ def crawl_web(seed):
     i=0
     while to_crawl:
         current = to_crawl.pop()
-        if current not in crawled and current[0:4]=='http' and i<=500 :   #i<100: to reduce time to get results
+        if current not in crawled and current[0:4]=='http' and i<=100 :   #i<100: to reduce time to get results
             #current[0:4]: prevents schema error from requests package
             #https://stackoverflow.com/questions/30770213/no-schema-supplied-and-other-errors-with-using-requests-get
             content=get_page(current)
@@ -152,6 +152,27 @@ def hashtable_update(hash_table,word,value):
     bucket.append([word,value])
 
 
+#Compute popularity ranks of web pages using RELAXATION ALGORITHM
+def compute_ranks(graph):
+    d=0.8 #dampoing coefficient
+    num_loops=10
+    ranks={}
+    new_ranks={}
+    no_pages=len(graph)
+    for page in graph:
+        ranks[page]=1.0/no_pages
+
+    for i in range(0,num_loops):
+        new_ranks={}
+        for page in graph:
+            new_ranks[page]= (1-d)/no_pages
+            for node in graph:
+                if page in graph[node]:
+                    new_ranks[page]+= d * ranks[node] / len(graph[node])
+
+        ranks=new_ranks
+
+    return ranks
 
 
 
@@ -177,4 +198,4 @@ print(table)
 """
 
 index, graph = crawl_web('http://google.com')
-print(graph)
+print(compute_ranks(graph))
