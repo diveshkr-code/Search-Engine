@@ -46,10 +46,11 @@ def union(list1, list2):
             list1.append(i)
 
 #   crawl_web: Given a seed page as input will output list of all the links below it as you browse deeper.
-def crawl_web(index,seed):
+def crawl_web(seed):
     to_crawl = [seed]
     crawled = []
     index={}
+    graph = {}
     i=0
     while to_crawl:
         current = to_crawl.pop()
@@ -57,12 +58,14 @@ def crawl_web(index,seed):
             #current[0:4]: prevents schema error from requests package
             #https://stackoverflow.com/questions/30770213/no-schema-supplied-and-other-errors-with-using-requests-get
             content=get_page(current)
-            index.append(add_page_to_index(index,current,content))
-            union(to_crawl,get_all_links(get_page(current)))
+            add_page_to_index(index,current,content)
+            oulinks = get_all_links(content)
+            graph[current] =  oulinks
+            union(to_crawl, oulinks)
             crawled.append(current)
         i+=1
 
-    return index
+    return index, graph
 
 
 # add_page_to_index: split the content(source code) into words(keyword) and add them into the index
@@ -151,6 +154,7 @@ def hashtable_update(hash_table,word,value):
 
 
 
+
 #print(get_all_links(get_page('http://stackexchange.com')))
 ##
 """
@@ -163,9 +167,14 @@ index=[]
 #print(crawl_web(index,'http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html'))
 #print(hash('au',12))
 
+"""
 table=make_hash_tables(3)
 hashtable_update(table,'udacity',25)
 hashtable_update(table,'udacity',27)
 hashtable_update(table,'coacity',28)
 hashtable_update(table,'doacity',29)
 print(table)
+"""
+
+index, graph = crawl_web('http://google.com')
+print(graph)
