@@ -176,7 +176,7 @@ def compute_ranks(graph):
 
 
 
-#print(get_all_links(get_page('http://stackexchange.com')))
+print(get_all_links(get_page('http://stackexchange.com')))
 ##
 """
     print(add_page_to_index([],'http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html',
