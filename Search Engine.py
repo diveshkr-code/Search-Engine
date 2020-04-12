@@ -185,17 +185,8 @@ def compute_ranks(graph):
 ##
 
 index=[]
-#print(crawl_web(index,'http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html'))
-#print(hash('au',12))
-
-"""
-table=make_hash_tables(3)
-hashtable_update(table,'udacity',25)
-hashtable_update(table,'udacity',27)
-hashtable_update(table,'coacity',28)
-hashtable_update(table,'doacity',29)
-print(table)
-"""
+print(crawl_web(index,'http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html'))
+print(hash('au',12))
 
 index, graph = crawl_web('http://google.com')
 print(compute_ranks(graph))
