@@ -185,7 +185,7 @@ print(get_all_links(get_page('http://stackexchange.com')))
 ##
 
 index=[]
-print(crawl_web(index,'http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html'))
+print(crawl_web('http://titan.dcs.bbk.ac.uk/~kikpef01/testpage.html'))
 print(hash('au',12))
 
 index, graph = crawl_web('http://google.com')
