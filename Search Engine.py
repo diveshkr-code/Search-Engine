@@ -7,8 +7,9 @@
 #Given a url this code will find all the links in that url by
 #1.Extract source code using get_page
 #2.Using get_all_links
+import requests
+
 def get_page(url):
-        import requests
         return requests.get(url).text
 
 
