@@ -9,4 +9,4 @@ def get_page(url):
     except:
         return "Error with Loading the page"
 
-print(get_page('https://www.google.com/'))
+#print(get_page('https://www.google.com/'))
